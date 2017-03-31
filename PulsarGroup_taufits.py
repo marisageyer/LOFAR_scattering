@@ -17,8 +17,10 @@ from scipy import special
 import DataReadIn as dri
 
 
+pathd = "/home/geyer"
+
 """Path to the freq, tau, tauerr txtfiles"""
-txtpath_iso = "/Users/marisa/python-workingdir/Calibrated_ArticleData/Lists/FreqTaulists/FreqTau"
+txtpath_iso = os.path.join(pathd, "Dropbox/Aris/LOFARCommCensus/Lewandowski15/FreqTau")
 txtpath_1D = "/Users/marisa/python-workingdir/Calibrated_ArticleData/Lists/FreqTaulists/FreqTau_onedim"
 
 freqtaus = []

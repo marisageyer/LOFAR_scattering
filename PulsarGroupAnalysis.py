@@ -26,13 +26,24 @@ import DataReadIn as dri
 """Tau at 1 GHz vs DM plots"""
 
 
-LTab_noIT = np.loadtxt('/Users/marisa/Dropbox/Aris/LOFARCommCensus/Lewandowski15/Lewand15Tau_noIT.txt',skiprows=1)
-LTab = np.loadtxt('/Users/marisa/Dropbox/Aris/LOFARCommCensus/Lewandowski15/Lewand15Tau.txt')
-LohTau01 = np.loadtxt('/Users/marisa/Dropbox/Aris/LOFARCommCensus/Lewandowski15/Lohmer01Tau.txt')
-LohTau04 = np.loadtxt('/Users/marisa/Dropbox/Aris/LOFARCommCensus/Lewandowski15/Lohmer04Tau.txt')
-GTau = np.loadtxt('/Users/marisa/Dropbox/Aris/LOFARCommCensus/Lewandowski15/GeyerTau.txt',skiprows=1)
-L13_noIT = np.loadtxt(dri.skip_first_col('/Users/marisa/Dropbox/Aris/LOFARCommCensus/Lewandowski15/Lewan13Table_noIT.txt'),skiprows=1)
-L13 = np.loadtxt(dri.skip_first_col('/Users/marisa/Dropbox/Aris/LOFARCommCensus/Lewandowski15/Lewan13Table.txt'),skiprows=1)
+#LTab_noIT = np.loadtxt('/Users/marisa/Dropbox/Aris/LOFARCommCensus/Lewandowski15/Lewand15Tau_noIT.txt',skiprows=1)
+#LTab = np.loadtxt('/Users/marisa/Dropbox/Aris/LOFARCommCensus/Lewandowski15/Lewand15Tau.txt')
+#LohTau01 = np.loadtxt('/Users/marisa/Dropbox/Aris/LOFARCommCensus/Lewandowski15/Lohmer01Tau.txt')
+#LohTau04 = np.loadtxt('/Users/marisa/Dropbox/Aris/LOFARCommCensus/Lewandowski15/Lohmer04Tau.txt')
+#GTau = np.loadtxt('/Users/marisa/Dropbox/Aris/LOFARCommCensus/Lewandowski15/GeyerTau.txt',skiprows=1)
+#L13_noIT = np.loadtxt(dri.skip_first_col('/Users/marisa/Dropbox/Aris/LOFARCommCensus/Lewandowski15/Lewan13Table_noIT.txt'),skiprows=1)
+#L13 = np.loadtxt(dri.skip_first_col('/Users/marisa/Dropbox/Aris/LOFARCommCensus/Lewandowski15/Lewan13Table.txt'),skiprows=1)
+
+
+pathd = "/home/geyer"
+
+LTab_noIT = np.loadtxt(os.path.join(pathd,'Dropbox/Aris/LOFARCommCensus/Lewandowski15/Lewand15Tau_noIT.txt'),skiprows=1)
+LTab = np.loadtxt(os.path.join(pathd,'Dropbox/Aris/LOFARCommCensus/Lewandowski15/Lewand15Tau.txt'))
+LohTau01 = np.loadtxt(os.path.join(pathd,'Dropbox/Aris/LOFARCommCensus/Lewandowski15/Lohmer01Tau.txt'))
+LohTau04 = np.loadtxt(os.path.join(pathd,'Dropbox/Aris/LOFARCommCensus/Lewandowski15/Lohmer04Tau.txt'))
+GTau = np.loadtxt(os.path.join(pathd,'Dropbox/Aris/LOFARCommCensus/Lewandowski15/GeyerTau.txt'),skiprows=1)
+L13_noIT = np.loadtxt(dri.skip_first_col(os.path.join(pathd,'Dropbox/Aris/LOFARCommCensus/Lewandowski15/Lewan13Table_noIT.txt')),skiprows=1)
+L13 = np.loadtxt(dri.skip_first_col(os.path.join(pathd,'Dropbox/Aris/LOFARCommCensus/Lewandowski15/Lewan13Table.txt')),skiprows=1)
 
 ##Combine all the data sets to be able to do tau-fitting
 
@@ -138,10 +149,10 @@ plt.yticks(fontsize=14)
 
 """Alpha vs DM plots"""
 
-Lohm01 = np.loadtxt(dri.skip_first_col('/Users/marisa/Dropbox/Aris/LOFARCommCensus/Lewandowski15/Lohmer2001DMAlphaDist.txt'),skiprows=1)
-Lohm04 = np.loadtxt('/Users/marisa/Dropbox/Aris/LOFARCommCensus/Lewandowski15/LohmerDMDistAlpha.txt',skiprows=1)
-GTab = np.loadtxt('/Users/marisa/Dropbox/Aris/LOFARCommCensus/DMDistAlphaGeyer.txt', skiprows = 1)
-John98 = np.loadtxt(dri.skip_first_col('/Users/marisa/Dropbox/Aris/LOFARCommCensus/Lewandowski15/Johnston98.txt'), skiprows = 1) 
+Lohm01 = np.loadtxt(dri.skip_first_col(os.path.join(pathd,'Dropbox/Aris/LOFARCommCensus/Lewandowski15/Lohmer2001DMAlphaDist.txt')),skiprows=1)
+Lohm04 = np.loadtxt(os.path.join(pathd,'Dropbox/Aris/LOFARCommCensus/Lewandowski15/LohmerDMDistAlpha.txt'),skiprows=1)
+GTab = np.loadtxt(os.path.join(pathd,'Dropbox/Aris/LOFARCommCensus/DMDistAlphaGeyer.txt'), skiprows = 1)
+John98 = np.loadtxt(dri.skip_first_col(os.path.join(pathd, 'Dropbox/Aris/LOFARCommCensus/Lewandowski15/Johnston98.txt')), skiprows = 1) 
 
 
 gdm = GTab[:,0]
@@ -212,3 +223,75 @@ plt.errorbar(GTau[:,4],GTau[:,2], GTau[:,3],fmt = 'go',markersize=10, alpha=0.8,
 plt.xlabel('tau')
 plt.ylabel('alpha')
 
+
+""" Alpha vs Tau at a variety of frequencies using Lohmer 2001, Lohmer2004 and our results"""
+
+GeyerTaus = os.path.join(pathd, "Dropbox/Aris/LOFARCommCensus/Lewandowski15/FreqTau")
+freqtaus = []
+pulsars = []
+
+for filename in os.listdir(GeyerTaus):
+    pulsar = filename[0:10]
+    freqtaufile = np.loadtxt(os.path.join(GeyerTaus,filename))
+    freqtaus.append(freqtaufile)
+    pulsars.append(pulsar)
+#Freqs are in column 0, taus in column 1
+
+alfs = np.delete(galf,4)
+alfserr = np.delete(galferr,4)
+
+alfsmat = []
+alfserrmat = []
+
+for i in range(15):
+    alfm = np.ones(len(freqtaus[i][:,1]))*alfs[i]
+    alfmerr = np.ones(len(freqtaus[i][:,1]))*alfserr[i]
+    alfsmat.append(alfm)
+    alfserrmat.append(alfmerr)
+
+
+"""Import the Lohmer results"""
+
+L01Tau = np.loadtxt(os.path.join(pathd,'Dropbox/Aris/LOFARCommCensus/Lewandowski15/Lohmer2001Taus.txt'),skiprows=1)
+L04Tau = np.loadtxt(os.path.join(pathd,'Dropbox/Aris/LOFARCommCensus/Lewandowski15/Lohmer2004Taus.txt'),skiprows=1)
+
+
+plt.figure()
+for i in range(15):
+    plt.errorbar(1000*freqtaus[i][:,1],alfsmat[i],yerr=alfserrmat[i],fmt='o',label='%s' %pulsars[i])
+    plt.ylabel(r'$\alpha$')
+    plt.xlabel(r'$\tau$ (ms)')
+    plt.legend(fontsize=9)
+
+#plt.figure()
+plt.errorbar(L01Tau[:,1],L01Tau[:,3],yerr=L01Tau[:,4],fmt='k^',markerfacecolor='None',label='Lohmer 2001')
+plt.errorbar(L04Tau[:,1],L04Tau[:,3],yerr=L04Tau[:,4],fmt='k^',label='Lohmer 2004')
+plt.ylabel(r'$\alpha$')
+plt.xlabel(r'$\tau$ (ms)')
+plt.legend(fontsize=9)
+
+"""Histogram """
+
+tausall=[]
+for i in range(15):
+    tauall = 1000*freqtaus[i][:,1]
+    tausall.append(tauall)
+
+from itertools import chain
+
+tauchain = list(chain.from_iterable(tausall[i] for i in range(15)))
+alfchain = list(chain.from_iterable(alfsmat[i] for i in range(15)))
+
+#alftau = np.column_stack((alfchain, tauchain))
+#alftausort = alftau[alftau[:,0].argsort()]
+plt.figure()
+plt.hist(np.concatenate((alfs,Lohm01[:,1],Lohm04[:,2],John98[:,1],L13[:,2],LTab[:,2])))
+plt.xlabel(r'$\alpha$')
+
+plt.figure()
+plt.hist(np.concatenate((alfs,Lohm01[:,1],Lohm04[:,2],John98[:,1],L13_noIT[:,2],LTab_noIT[:,2])),facecolor='r')
+plt.xlabel(r'$\alpha$')
+
+plt.figure()
+plt.hist(tauchain)
+plt.xlabel(r'$\tau$ (ms)')
