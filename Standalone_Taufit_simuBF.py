@@ -209,13 +209,13 @@ else:
 
 profilexaxis = np.linspace(0,pulseperiod,nbins)
 
-#for i in range(10):
-#    plt.close()
+for i in range(10):
+    plt.close()
 
 
 ## Create subplot structure
 sp = 12 #number of subplots per figure
-#plt.figure(figsize=(16,10))  
+plt.figure(figsize=(16,10))  
 
 #Fit profile using tau_fitter
 
@@ -530,47 +530,47 @@ else:
 ##PLOT PROFILES##
 
 totFig = (npch+5)/sp + 1
-#for i in range(totFig):
-#    plt.figure((totFig-i), figsize=(16,10))
-#    plt.figure((totFig-i))
+for i in range(totFig):
+    plt.figure((totFig-i), figsize=(16,10))
+    plt.figure((totFig-i))
 
 profiles = []
-#for j in range(npch):
-#    if j+1 == sp:
-#        numFig = (j+1)/sp
-#        subplotcount = sp
-#    else: 
-#        numFig = (j+1)/sp + 1
-#        if j+1 < sp:
-#            subplotcount = j+1
-#        else: 
-#            subplotcount = j+1 - sp
-#    bins, profile = psr.makeprofile(nbins = nbins, ncomps = 1, amps = bestpT_highSNR[2][j], means = bestpT_highSNR[1][j], sigmas = bestpT_highSNR[0][j])
-#    profiles.append(profile)
-#    smootheddata = psr.smooth(datas[j],int(0.05*nbins))
-#    plt.figure(numFig,figsize=(16,10))    
-#    plt.subplot(3,4,subplotcount)
-#    plt.rc('text', usetex=True)
-#    plt.rc('font', family='serif')
-#    plt.tight_layout()
-##    data_highsnr[j] = np.hstack((data_highsnr[j][800:1024],data_highsnr[j][0:800]))
-##    model_highsnr[j] = np.hstack((model_highsnr[j][800:1024],model_highsnr[j][0:800]))
-#    plt.plot(profilexaxis,data_highsnr[j],'y',alpha = 0.5)
-##    plt.plot(profilexaxis,shifted_data[j],'g',alpha = 0.6)
-#    plt.plot(profilexaxis,model_highsnr[j],'r', alpha = 0.7)
-##    plt.plot(profilexaxis,smootheddata,'g', alpha = 0.4,lw=2.0)
-##    plt.plot(profilexaxis,profile,'k', alpha = 0.7)
-#    plt.title('%s at %.1f MHz' %(pulsars[j], freqMHz_highsnr[j]))
-#    plt.annotate(r'$\tau: %.4f \pm %.4f$ sec' %(taus_highsnr[j]*pulseperiod/nbins, lmfitstds_highsnr[j]*pulseperiod/nbins),xy=(np.max(profilexaxis),np.max(data_highsnr[j])),xycoords='data',xytext=(0.4,0.8),textcoords='axes fraction',fontsize=12)
-#    if len(taus2_highsnr) != 0:
-#        plt.annotate(r'$\tau2: %.5f \pm %.5f$ sec' %(taus2_highsnr[j]*pulseperiod/nbins, lmfitstds2_highsnr[j]*pulseperiod/nbins),xy=(np.max(profilexaxis),np.max(data_highsnr[j])),xycoords='data',xytext=(0.4,0.6),textcoords='axes fraction',fontsize=12)        
-#    plt.ylim(ymax=1.1*np.max(data_highsnr[j]))
-##    plt.ylim(-200.0,700.0)
-#    plt.xticks(fontsize=12)
-#    plt.yticks(fontsize=12)
-#    plt.xlabel('time (s)')
-#    plt.ylabel('intensity')
-#        
+for j in range(npch):
+    if j+1 == sp:
+        numFig = (j+1)/sp
+        subplotcount = sp
+    else: 
+        numFig = (j+1)/sp + 1
+        if j+1 < sp:
+            subplotcount = j+1
+        else: 
+            subplotcount = j+1 - sp
+    bins, profile = psr.makeprofile(nbins = nbins, ncomps = 1, amps = bestpT_highSNR[2][j], means = bestpT_highSNR[1][j], sigmas = bestpT_highSNR[0][j])
+    profiles.append(profile)
+    smootheddata = psr.smooth(datas[j],int(0.05*nbins))
+    plt.figure(numFig,figsize=(16,10))    
+    plt.subplot(3,4,subplotcount)
+    plt.rc('text', usetex=True)
+    plt.rc('font', family='serif')
+    plt.tight_layout()
+#    data_highsnr[j] = np.hstack((data_highsnr[j][800:1024],data_highsnr[j][0:800]))
+#    model_highsnr[j] = np.hstack((model_highsnr[j][800:1024],model_highsnr[j][0:800]))
+    plt.plot(profilexaxis,data_highsnr[j],'y',alpha = 0.5)
+#    plt.plot(profilexaxis,shifted_data[j],'g',alpha = 0.6)
+    plt.plot(profilexaxis,model_highsnr[j],'r', alpha = 0.7)
+#    plt.plot(profilexaxis,smootheddata,'g', alpha = 0.4,lw=2.0)
+#    plt.plot(profilexaxis,profile,'k', alpha = 0.7)
+    plt.title('%s at %.1f MHz' %(pulsars[j], freqMHz_highsnr[j]))
+    plt.annotate(r'$\tau: %.4f \pm %.4f$ sec' %(taus_highsnr[j]*pulseperiod/nbins, lmfitstds_highsnr[j]*pulseperiod/nbins),xy=(np.max(profilexaxis),np.max(data_highsnr[j])),xycoords='data',xytext=(0.4,0.8),textcoords='axes fraction',fontsize=12)
+    if len(taus2_highsnr) != 0:
+        plt.annotate(r'$\tau2: %.5f \pm %.5f$ sec' %(taus2_highsnr[j]*pulseperiod/nbins, lmfitstds2_highsnr[j]*pulseperiod/nbins),xy=(np.max(profilexaxis),np.max(data_highsnr[j])),xycoords='data',xytext=(0.4,0.6),textcoords='axes fraction',fontsize=12)        
+    plt.ylim(ymax=1.1*np.max(data_highsnr[j]))
+#    plt.ylim(-200.0,700.0)
+    plt.xticks(fontsize=12)
+    plt.yticks(fontsize=12)
+    plt.xlabel('time (s)')
+    plt.ylabel('intensity')
+        
 
 if npch >= sp:
     subpl_ind = int(npch-sp) +1
@@ -582,17 +582,17 @@ if npch + 1 == sp:
 else:
     numfig = (npch+1)/sp + 1
 #
-###PLOT FLUX##  
-#plt.figure(numfig, figsize=(16,10))
-#plt.subplot(3,4,subpl_ind)
-#plt.rc('text', usetex=True)
-#plt.rc('font', family='serif')
-#plt.plot(freqMHz_highsnr,fluxes_highsnr,'mo')
-#plt.title('%s' %(pulsar))
-#plt.xticks(fontsize=12)
-#plt.yticks(fontsize=12)
-#plt.xlabel(r'$\nu$ (MHz)',fontsize=16)
-#plt.ylabel(r'Calibrated flux (mJy)',fontsize=16)
+##PLOT FLUX##  
+plt.figure(numfig, figsize=(16,10))
+plt.subplot(3,4,subpl_ind)
+plt.rc('text', usetex=True)
+plt.rc('font', family='serif')
+plt.plot(freqMHz_highsnr,fluxes_highsnr,'mo')
+plt.title('%s' %(pulsar))
+plt.xticks(fontsize=12)
+plt.yticks(fontsize=12)
+plt.xlabel(r'$\nu$ (MHz)',fontsize=16)
+plt.ylabel(r'Calibrated flux (mJy)',fontsize=16)
 
 lmfittausstds = np.array(lmfittausstds)
 obtainedtaus = np.array(obtainedtaus)
@@ -675,79 +675,79 @@ for k in range(9,12):
 print "tau_1GHz = %.8f sec" %tau_1GHz
 print "tau_100MHz = %.8f sec" %tau_100MHz
     
-#PLOT TAU##  
+### PLOT TAU##  
     
-#if subpl_ind >= sp:
-#    subpl_ind2 = int(subpl_ind-sp) +1
-#else:
-#    subpl_ind2 = int(subpl_ind) + 1
-#
-#if npch + 2 == sp:    
-#    numfig2 = (npch+2)/sp
-#else:
-#    numfig2 = (npch+2)/sp + 1
-#
-#plt.figure(numfig2, figsize=(16,10))
-#plt.subplot(3,4,subpl_ind2)
-##plt.tight_layout()
-#plt.errorbar(1000.*freqms_highsnr,taussec_highsnr,yerr=lmfitstds_highsnr*pulseperiod/nbins,fmt='k*',markersize=9.0,capthick=2,linewidth=1.5)
-#plt.plot(1000.*freqms_highsnr, powouttau_highsnr.best_fit, 'k-')
-##plt.plot(1000.*freqms_highsnr, powouttau_highsnr1.best_fit, 'k--', label=r'Unweighted: $\alpha = %.2f \pm %.2f$' %(specfitdata_highsnr1,specdata_err_highsnr1))
-#plt.title(r'$\alpha = %.2f \pm %.2f$' %(specfitdata_highsnr,specdata_err_highsnr))
-##plt.annotate('%s' %pulsar,xy=(np.max(1000*freqms),np.max(obtainedtausec)),xycoords='data',xytext=(0.5,0.7),textcoords='axes fraction',fontsize=14)
-#plt.xticks(fontsize=12)
-#plt.yticks(fontsize=12)
-#plt.xlabel(r'$\nu$ MHz',fontsize=16)
-#plt.ylabel(r'$\tau$ (sec)',fontsize=16)
-#
-#
-#
-## PLOT TAU LOG ##  
+if subpl_ind >= sp:
+    subpl_ind2 = int(subpl_ind-sp) +1
+else:
+    subpl_ind2 = int(subpl_ind) + 1
 
-#if subpl_ind2 >= sp:
-#    subpl_ind3 = int(subpl_ind2-sp) +1
-#else:
-#    subpl_ind3 = int(subpl_ind2) + 1
-#    
-#if npch + 3 == sp:    
-#    numfig3 = (npch+3)/sp
-#else:
-#    numfig3 = (npch+3)/sp + 1
-#
-#
-#freqmsMHz = np.array(freqmsMHz)
-#ticksMHz = freqmsMHz.astype(np.int)[0:len(freqmsMHz):2]
-#
-#plt.figure(numfig3,figsize=(16,10))
-#plt.subplot(3,4,subpl_ind3)
-##plt.figure(NF,figsize=(12,4))
-##plt.subplot(1,3,1)
-#plt.errorbar(1000.*freqms_highsnr,taussec_highsnr,yerr=lmfitstds_highsnr*pulseperiod/nbins,fmt='k*',markersize=9.0,capthick=2,linewidth=1.5,label=r'$\alpha = %.2f \pm %.2f$' %(specfitdata_highsnr,specdata_err_highsnr))
-#plt.plot(1000.*freqms_highsnr, powouttau_highsnr.best_fit, 'k-')
-#plt.title('%s' %pulsar)
-##plt.annotate('%s' %pulsar,xy=(np.max(1000*freqms),np.max(obtainedtausec)),xycoords='data',xytext=(0.5,0.7),textcoords='axes fraction',fontsize=14)
-#plt.yticks(fontsize=12)
-#plt.xlabel(r'$\nu$ (MHz)',fontsize=16)
-#plt.ylabel(r'$\tau$ (sec)',fontsize=16)
-#plt.legend(fontsize=14)
-#plt.xscale('log')
-#plt.yscale('log')
-#plt.xlim(xmin=(freqms[0])*950,xmax=(freqms[-1])*1050)
-#plt.xticks(ticksMHz,ticksMHz,fontsize=12)
+if npch + 2 == sp:    
+    numfig2 = (npch+2)/sp
+else:
+    numfig2 = (npch+2)/sp + 1
+
+plt.figure(numfig2, figsize=(16,10))
+plt.subplot(3,4,subpl_ind2)
 #plt.tight_layout()
+plt.errorbar(1000.*freqms_highsnr,taussec_highsnr,yerr=lmfitstds_highsnr*pulseperiod/nbins,fmt='k*',markersize=9.0,capthick=2,linewidth=1.5)
+plt.plot(1000.*freqms_highsnr, powouttau_highsnr.best_fit, 'k-')
+#plt.plot(1000.*freqms_highsnr, powouttau_highsnr1.best_fit, 'k--', label=r'Unweighted: $\alpha = %.2f \pm %.2f$' %(specfitdata_highsnr1,specdata_err_highsnr1))
+plt.title(r'$\alpha = %.2f \pm %.2f$' %(specfitdata_highsnr,specdata_err_highsnr))
+#plt.annotate('%s' %pulsar,xy=(np.max(1000*freqms),np.max(obtainedtausec)),xycoords='data',xytext=(0.5,0.7),textcoords='axes fraction',fontsize=14)
+plt.xticks(fontsize=12)
+plt.yticks(fontsize=12)
+plt.xlabel(r'$\nu$ MHz',fontsize=16)
+plt.ylabel(r'$\tau$ (sec)',fontsize=16)
 
 
-##PLOT CHANGE in ALPHA ##  
 
-#if subpl_ind3 >= sp:
-#    subpl_ind4 = int(subpl_ind3-sp) +1
-#else:
-#    subpl_ind4 = int(subpl_ind3) + 1
-#    
-#if npch + 4 == sp:    
-#    numfig4 = (npch+4)/sp
-#else:
-#    numfig4 = (npch+4)/sp + 1
+### PLOT TAU LOG ##  
+
+if subpl_ind2 >= sp:
+    subpl_ind3 = int(subpl_ind2-sp) +1
+else:
+    subpl_ind3 = int(subpl_ind2) + 1
+    
+if npch + 3 == sp:    
+    numfig3 = (npch+3)/sp
+else:
+    numfig3 = (npch+3)/sp + 1
+
+
+freqmsMHz = np.array(freqmsMHz)
+ticksMHz = freqmsMHz.astype(np.int)[0:len(freqmsMHz):2]
+
+plt.figure(numfig3,figsize=(16,10))
+plt.subplot(3,4,subpl_ind3)
+#plt.figure(NF,figsize=(12,4))
+#plt.subplot(1,3,1)
+plt.errorbar(1000.*freqms_highsnr,taussec_highsnr,yerr=lmfitstds_highsnr*pulseperiod/nbins,fmt='k*',markersize=9.0,capthick=2,linewidth=1.5,label=r'$\alpha = %.2f \pm %.2f$' %(specfitdata_highsnr,specdata_err_highsnr))
+plt.plot(1000.*freqms_highsnr, powouttau_highsnr.best_fit, 'k-')
+plt.title('%s' %pulsar)
+#plt.annotate('%s' %pulsar,xy=(np.max(1000*freqms),np.max(obtainedtausec)),xycoords='data',xytext=(0.5,0.7),textcoords='axes fraction',fontsize=14)
+plt.yticks(fontsize=12)
+plt.xlabel(r'$\nu$ (MHz)',fontsize=16)
+plt.ylabel(r'$\tau$ (sec)',fontsize=16)
+plt.legend(fontsize=14)
+plt.xscale('log')
+plt.yscale('log')
+plt.xlim(xmin=(freqms[0])*950,xmax=(freqms[-1])*1050)
+plt.xticks(ticksMHz,ticksMHz,fontsize=12)
+plt.tight_layout()
+
+
+###PLOT CHANGE in ALPHA ##  
+
+if subpl_ind3 >= sp:
+    subpl_ind4 = int(subpl_ind3-sp) +1
+else:
+    subpl_ind4 = int(subpl_ind3) + 1
+    
+if npch + 4 == sp:    
+    numfig4 = (npch+4)/sp
+else:
+    numfig4 = (npch+4)/sp + 1
 
 """Calculate how the spectral index is changing as more and more low freq. channels are added"""
 
@@ -765,43 +765,43 @@ for i in range(npch-1):
 
 freq_incl = 1000*freqms_highsnr[::-1][1:]
 
-#plt.figure(numfig4, figsize=(16,10))
-#plt.subplot(3,4,subpl_ind4)
-#plt.errorbar(freq_incl,spec_sec,yerr=spec_std_sec,fmt='k*',markersize=5.0,capthick=2,linewidth=0.5)
-#plt.title(r'Change in spectral index')
-#for x,y in zip(freq_incl[0::2], spec_sec[0::2]):
-#    plt.annotate('%.2f' %y, xy=(x,1.08*y), xycoords='data',textcoords='data')
-#plt.ylim(plt.ylim()[0],1.1*plt.ylim()[1])
-#plt.yticks(fontsize=12)
-#plt.xticks(fontsize=12)
-#plt.xlabel(r'Lowest freq included (MHz)',fontsize=16)
-#plt.ylabel(r'$\alpha$',fontsize=16)
-#plt.tight_layout()
+plt.figure(numfig4, figsize=(16,10))
+plt.subplot(3,4,subpl_ind4)
+plt.errorbar(freq_incl,spec_sec,yerr=spec_std_sec,fmt='k*',markersize=5.0,capthick=2,linewidth=0.5)
+plt.title(r'Change in spectral index')
+for x,y in zip(freq_incl[0::2], spec_sec[0::2]):
+    plt.annotate('%.2f' %y, xy=(x,1.08*y), xycoords='data',textcoords='data')
+plt.ylim(plt.ylim()[0],1.1*plt.ylim()[1])
+plt.yticks(fontsize=12)
+plt.xticks(fontsize=12)
+plt.xlabel(r'Lowest freq included (MHz)',fontsize=16)
+plt.ylabel(r'$\alpha$',fontsize=16)
+plt.tight_layout()
 
-#
-###PLOT CHI ##  
-#
-#if subpl_ind4 >= sp:
-#    subpl_ind5 = int(subpl_ind4-sp)+1
-#else:
-#    subpl_ind5 = int(subpl_ind4)+1
-#
-#if npch + 5 == sp:    
-#    numfig5 = (npch+5)/sp
-#else:
-#    numfig5 = (npch+5)/sp + 1
-#
-#redchis_highsnr = np.delete(np.array(redchis),ind_uniq)
-#
-#plt.figure(numfig5, figsize=(16,10))
-#plt.subplot(3,4,subpl_ind5)
-#plt.plot(1000.*freqms_highsnr, redchis_highsnr, 'r*', markersize = 12)
-#plt.title(r'Reduced $\chi^2$ values')
-#plt.annotate('%s' %pulsar,xy=(np.max(1000*freqms),np.max(obtainedtausec)),xycoords='data',xytext=(0.5,0.7),textcoords='axes fraction',fontsize=14)
-#plt.yticks(fontsize=10)
-#plt.xticks(fontsize=12)
-#plt.xlabel(r'$\nu$ MHz',fontsize=16)
-#plt.ylabel(r'$\chi^2$',fontsize=16)
+
+#PLOT CHI ##  
+
+if subpl_ind4 >= sp:
+    subpl_ind5 = int(subpl_ind4-sp)+1
+else:
+    subpl_ind5 = int(subpl_ind4)+1
+
+if npch + 5 == sp:    
+    numfig5 = (npch+5)/sp
+else:
+    numfig5 = (npch+5)/sp + 1
+
+redchis_highsnr = np.delete(np.array(redchis),ind_uniq)
+
+plt.figure(numfig5, figsize=(16,10))
+plt.subplot(3,4,subpl_ind5)
+plt.plot(1000.*freqms_highsnr, redchis_highsnr/np.power(rms_highsnr,2), 'r*', markersize = 12)
+plt.title(r'Reduced $\chi^2$ values')
+plt.annotate('%s' %pulsar,xy=(np.max(1000*freqms),np.max(obtainedtausec)),xycoords='data',xytext=(0.5,0.7),textcoords='axes fraction',fontsize=14)
+plt.yticks(fontsize=10)
+plt.xticks(fontsize=12)
+plt.xlabel(r'$\nu$ MHz',fontsize=16)
+plt.ylabel(r'$\chi^2$',fontsize=16)
 #
 #
 #### PLOT MU ##
@@ -1249,3 +1249,5 @@ freq_incl = 1000*freqms_highsnr[::-1][1:]
 ##for k in range(11):
 ##    dri.log_writer(logpath,logfilename, eval('print{0}'.format(k)))
 ##
+
+plt.show()
